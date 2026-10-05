@@ -145,39 +145,6 @@
     <button class="btn-reset" id="resetBtn">Reset Counter</button>
   </div>
 
-  <script>
-    let count = 0;
-    const counterDisplay = document.getElementById('counter');
-    const cookieContainer = document.getElementById('cookieContainer');
-    const resetBtn = document.getElementById('resetBtn');
-
-    cookieContainer.addEventListener('click', (e) => {
-      count++;
-      counterDisplay.textContent = count;
-
-      // Create floating +1 animation
-      const pop = document.createElement('div');
-      pop.classList.add('click-pop');
-      pop.textContent = '+1';
-
-      const rect = cookieContainer.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-
-      pop.style.left = `${x}px`;
-      pop.style.top = `${y}px`;
-
-      cookieContainer.appendChild(pop);
-
-      setTimeout(() => {
-        pop.remove();
-      }, 800);
-    });
-
-    resetBtn.addEventListener('click', () => {
-      count = 0;
-      counterDisplay.textContent = count;
-    });
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
