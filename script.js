@@ -26,6 +26,21 @@ let count = 0;
 const counterDisplay = document.getElementById('counter');
 const cookieContainer = document.getElementById('cookieContainer');
 const resetBtn = document.getElementById('resetBtn');
+const trophyCards = document.querySelectorAll('.trophy-card');
+
+function updateAchievements() {
+  trophyCards.forEach(card => {
+    const threshold = parseInt(card.getAttribute('data-threshold'), 10);
+    const statusElem = card.querySelector('.trophy-status');
+    if (count >= threshold) {
+      card.classList.add('unlocked');
+      if (statusElem) statusElem.textContent = 'Unlocked!';
+    } else {
+      card.classList.remove('unlocked');
+      if (statusElem) statusElem.textContent = 'Locked';
+    }
+  });
+}
 
 // Initialize count from cookie
 const savedCount = getCookie('cookieClicks');
@@ -33,12 +48,14 @@ if (savedCount !== "") {
   count = parseInt(savedCount, 10) || 0;
 }
 counterDisplay.textContent = count;
+updateAchievements();
 
 // Event Listeners
 cookieContainer.addEventListener('click', (e) => {
   count++;
   counterDisplay.textContent = count;
   setCookie('cookieClicks', count);
+  updateAchievements();
 
   // Create floating +1 animation
   const pop = document.createElement('div');
@@ -46,8 +63,8 @@ cookieContainer.addEventListener('click', (e) => {
   pop.textContent = '+1';
 
   const rect = cookieContainer.getBoundingClientRect();
-  const x = e.clientX - rect.left;
-  const y = e.clientY - rect.top;
+  const x = e ? e.clientX - rect.left : 0;
+  const y = e ? e.clientY - rect.top : 0;
 
   pop.style.left = `${x}px`;
   pop.style.top = `${y}px`;
@@ -63,4 +80,5 @@ resetBtn.addEventListener('click', () => {
   count = 0;
   counterDisplay.textContent = count;
   setCookie('cookieClicks', count);
+  updateAchievements();
 });

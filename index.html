@@ -113,6 +113,78 @@
     .btn-reset:active {
       transform: scale(0.95);
     }
+
+    .achievements-section {
+      margin-top: 1.5rem;
+      width: 100%;
+      border-top: 2px dashed #d7ccc8;
+      padding-top: 1rem;
+    }
+
+    .achievements-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #5c3214;
+      margin-bottom: 0.8rem;
+    }
+
+    .trophies-grid {
+      display: flex;
+      justify-content: space-around;
+      gap: 0.5rem;
+    }
+
+    .trophy-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0.5rem;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.6);
+      width: 30%;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .trophy-icon {
+      font-size: 2rem;
+      filter: grayscale(100%);
+      opacity: 0.35;
+      transition: filter 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .trophy-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-top: 0.2rem;
+      color: #7f6a5b;
+    }
+
+    .trophy-status {
+      font-size: 0.65rem;
+      color: #a08c7d;
+      margin-top: 0.1rem;
+    }
+
+    .trophy-card.unlocked {
+      background: rgba(255, 248, 225, 0.9);
+      box-shadow: 0 4px 12px rgba(210, 105, 30, 0.2);
+    }
+
+    .trophy-card.unlocked .trophy-icon {
+      filter: grayscale(0%);
+      opacity: 1;
+      transform: scale(1.1);
+    }
+
+    .trophy-card.unlocked .trophy-label {
+      color: #5c3214;
+    }
+
+    .trophy-card.unlocked .trophy-status {
+      color: #2e7d32;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
@@ -143,6 +215,27 @@
     </div>
 
     <button class="btn-reset" id="resetBtn">Reset Counter</button>
+
+    <div class="achievements-section">
+      <div class="achievements-title">Achievements</div>
+      <div class="trophies-grid">
+        <div class="trophy-card" id="trophy-10" data-threshold="10">
+          <div class="trophy-icon">🥉</div>
+          <div class="trophy-label">10 Clicks</div>
+          <div class="trophy-status">Locked</div>
+        </div>
+        <div class="trophy-card" id="trophy-100" data-threshold="100">
+          <div class="trophy-icon">🥈</div>
+          <div class="trophy-label">100 Clicks</div>
+          <div class="trophy-status">Locked</div>
+        </div>
+        <div class="trophy-card" id="trophy-1000" data-threshold="1000">
+          <div class="trophy-icon">🥇</div>
+          <div class="trophy-label">1000 Clicks</div>
+          <div class="trophy-status">Locked</div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <script src="script.js"></script>

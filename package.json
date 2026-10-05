@@ -1,0 +1,24 @@
+{
+  "name": "app",
+  "version": "1.0.0",
+  "description": "A simple, interactive web application featuring a centered chocolate chip cookie and a live counter that tracks how many times the cookie has been clicked.",
+  "main": "script.js",
+  "scripts": {
+    "test": "node --test verification/app.test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pabloniza-dev/clicker-jules.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/pabloniza-dev/clicker-jules/issues"
+  },
+  "homepage": "https://github.com/pabloniza-dev/clicker-jules#readme",
+  "devDependencies": {
+    "jsdom": "^29.1.1"
+  }
+}
