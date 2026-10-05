@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cookie Clicker</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #fceabb 0%, #f8b500 100%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #3d2314;
+      user-select: none;
+      overflow: hidden;
+    }
+
+    .container {
+      text-align: center;
+      background: rgba(255, 255, 255, 0.85);
+      padding: 2.5rem 3rem;
+      border-radius: 24px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+      backdrop-filter: blur(10px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      max-width: 400px;
+      width: 90%;
+      position: relative;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+      color: #5c3214;
+    }
+
+    .counter-container {
+      font-size: 2.5rem;
+      font-weight: bold;
+      margin: 1rem 0;
+      color: #8b4513;
+    }
+
+    .cookie-wrapper {
+      position: relative;
+      margin: 1.5rem 0;
+      cursor: pointer;
+    }
+
+    .cookie {
+      width: 180px;
+      height: 180px;
+      transition: transform 0.1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      filter: drop-shadow(0 8px 16px rgba(0,0,0,0.2));
+    }
+
+    .cookie:hover {
+      transform: scale(1.05);
+    }
+
+    .cookie:active {
+      transform: scale(0.95);
+    }
+
+    .click-pop {
+      position: absolute;
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #d2691e;
+      pointer-events: none;
+      animation: floatUp 0.8s ease-out forwards;
+    }
+
+    @keyframes floatUp {
+      0% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-50px) scale(1.3);
+      }
+    }
+
+    .btn-reset {
+      margin-top: 1rem;
+      background-color: #8b4513;
+      color: #fff;
+      border: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: 12px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.2s, transform 0.1s;
+    }
+
+    .btn-reset:hover {
+      background-color: #5c3214;
+    }
+
+    .btn-reset:active {
+      transform: scale(0.95);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Cookie Clicker</h1>
+    <div class="counter-container">
+      Clicks: <span id="counter">0</span>
+    </div>
+
+    <div class="cookie-wrapper" id="cookieContainer">
+      <svg class="cookie" id="cookieSvg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <!-- Main Cookie Base -->
+        <circle cx="50" cy="50" r="45" fill="#d7ccc8" />
+        <circle cx="50" cy="50" r="44" fill="#c7a75c" />
+        <circle cx="48" cy="48" r="42" fill="#d4a359" />
+
+        <!-- Chocolate Chips -->
+        <circle cx="30" cy="30" r="5" fill="#3e2723" />
+        <circle cx="65" cy="28" r="6" fill="#3e2723" />
+        <circle cx="45" cy="52" r="5.5" fill="#3e2723" />
+        <circle cx="25" cy="65" r="5" fill="#3e2723" />
+        <circle cx="70" cy="60" r="6" fill="#3e2723" />
+        <circle cx="50" cy="78" r="4.5" fill="#3e2723" />
+        <circle cx="75" cy="42" r="4" fill="#3e2723" />
+        <circle cx="28" cy="48" r="4" fill="#3e2723" />
+      </svg>
+    </div>
+
+    <button class="btn-reset" id="resetBtn">Reset Counter</button>
+  </div>
+
+  <script>
+    let count = 0;
+    const counterDisplay = document.getElementById('counter');
+    const cookieContainer = document.getElementById('cookieContainer');
+    const resetBtn = document.getElementById('resetBtn');
+
+    cookieContainer.addEventListener('click', (e) => {
+      count++;
+      counterDisplay.textContent = count;
+
+      // Create floating +1 animation
+      const pop = document.createElement('div');
+      pop.classList.add('click-pop');
+      pop.textContent = '+1';
+
+      const rect = cookieContainer.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      pop.style.left = `${x}px`;
+      pop.style.top = `${y}px`;
+
+      cookieContainer.appendChild(pop);
+
+      setTimeout(() => {
+        pop.remove();
+      }, 800);
+    });
+
+    resetBtn.addEventListener('click', () => {
+      count = 0;
+      counterDisplay.textContent = count;
+    });
+  </script>
+</body>
+</html>
